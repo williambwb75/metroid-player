@@ -7,10 +7,14 @@
 # ------------------------- #
 
 from modules.configLoader import configLoader
+from modules.shortcutGenerator import generateShortcuts
+from modules.emulatorData import generateEmulatorData
 
 def main():
 # {
     config = configLoader("config\\config.json")
+    generateEmulatorData(config.operatingSystem)
+    generateShortcuts(config.romFolders, config.operatingSystem, config.outputFolder)
     return 0
 # }
 

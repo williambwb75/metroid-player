@@ -1,4 +1,5 @@
 {
     "operatingSystem": "LINUX",
-    "romsFolder": "roms"
+    "romsFolder": "roms",
+    "outputFolder": "output"
 }

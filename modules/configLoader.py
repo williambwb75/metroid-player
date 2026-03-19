@@ -6,40 +6,11 @@
 # Author:   williambwb75
 # ------------------------- #
 
-from enum import Enum
+from modules.directoryScanner   import directoryScanner
+from modules.sharedTypes        import operatingSystem, romType
+from modules.shortcutGenerator  import romFolder
+
 import json
-import os
-
-from sqlalchemy import case
-from modules.directoryScanner import directoryScanner
-
-from tomlkit import key, value
-
-class operatingSystem(Enum):
-# {
-    LINUX   = 0
-    WINDOWS = 1
-# }
-
-class romType(Enum):
-# {
-    NES         = 0
-    SNES        = 1
-    GBA         = 2
-    WII         = 3
-    PRIMEHACK   = 4
-    _3DS        = 5
-
-# }
-
-class romFolder:
-# {
-    def __init__(self, romType, path):
-    # {
-        self.romType = romType
-        self.romPath = path
-    # }
-# }
 
 class configLoader:
 # {
@@ -48,6 +19,7 @@ class configLoader:
         self.configFilePath = configFilePath
         self.__getOperatingSystem()
         self.__getRomPaths()
+        self.__getOutputFolder()
     # }
 
     def __getOperatingSystem(self):
@@ -90,15 +62,15 @@ class configLoader:
             self.romFolders = []
             for folder in directoryScanner(jsonFile["romsFolder"]):
             # {
-                match folder.lower():
+                match folder:
                 # {
-                    case "nes":          self.romFolders.append(romFolder(romType.NES,          value))
-                    case "snes":         self.romFolders.append(romFolder(romType.SNES,         value))
-                    case "gba":          self.romFolders.append(romFolder(romType.GBA,          value))
-                    case "wii":          self.romFolders.append(romFolder(romType.WII,          value))
-                    case "primehack":    self.romFolders.append(romFolder(romType.PRIMEHACK,    value))
-                    case "3ds":          self.romFolders.append(romFolder(romType._3DS,         value))
-                    case _:              Warning(f"invalid key '{key}' in 'romsFolder' of config file")
+                    case "nes":          self.romFolders.append(romFolder(romType.NES,          jsonFile["romsFolder"]+"\\nes"))
+                    case "snes":         self.romFolders.append(romFolder(romType.SNES,         jsonFile["romsFolder"]+"\\snes"))
+                    case "gba":          self.romFolders.append(romFolder(romType.GBA,          jsonFile["romsFolder"]+"\\gba"))
+                    case "wii":          self.romFolders.append(romFolder(romType.WII,          jsonFile["romsFolder"]+"\\wii"))
+                    case "primehack":    self.romFolders.append(romFolder(romType.PRIMEHACK,    jsonFile["romsFolder"]+"\\primehack"))
+                    case "3ds":          self.romFolders.append(romFolder(romType._3DS,         jsonFile["romsFolder"]+"\\3ds"))
+                    case _:              Warning(f"invalid value '{folder}' in 'romsFolder' of config file")
                 # }
             # }
             if len(self.romFolders) == 0:
@@ -109,6 +81,26 @@ class configLoader:
         except KeyError:
         # {
             raise KeyError("Missing 'romPaths' in config file")
+        # }
+        except json.JSONDecodeError:    
+        # {
+            raise ValueError("invalid JSON found in config file")
+        # }
+    # }
+
+    def __getOutputFolder(self):
+    # {
+        try:
+        # {
+            with open(self.configFilePath) as file:
+            # {
+                jsonFile = json.load(file)
+            # }
+            self.outputFolder = jsonFile["outputFolder"]
+        # }
+        except KeyError:
+        # {
+            raise KeyError("Missing 'outputFolder' in config file")
         # }
         except json.JSONDecodeError:    
         # {
