@@ -6,9 +6,15 @@
 # Author:   williambwb75
 # ------------------------- #
 
-import modules.configLoader.py
+from modules.configLoader import configLoader
 
 def main():
 # {
+    config = configLoader("config\\config.json")
     return 0
+# }
+
+if __name__ == "__main__":
+# {
+    main()
 # }

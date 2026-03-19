@@ -8,7 +8,7 @@
 
 import os
 
-def directoryScanner()
+def directoryScanner(path):
 # {
-
+    return os.listdir(path)
 # }
