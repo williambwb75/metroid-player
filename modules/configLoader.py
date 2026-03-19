@@ -27,6 +27,8 @@ class romType(Enum):
     GBA         = 2
     WII         = 3
     PRIMEHACK   = 4
+    _3DS        = 5
+
 # }
 
 class romFolder:
@@ -94,6 +96,7 @@ class configLoader:
                     case "gba":          self.romFolders.append(romFolder(romType.GBA,          value))
                     case "wii":          self.romFolders.append(romFolder(romType.WII,          value))
                     case "primehack":    self.romFolders.append(romFolder(romType.PRIMEHACK,    value))
+                    case "3ds":          self.romFolders.append(romFolder(romType._3DS,         value))
                     case _:              Warning(f"invalid key '{key}' in 'romsFolder' of config file")
                 # }
             # }
