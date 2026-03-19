@@ -8,6 +8,7 @@
 
 from enum import Enum
 import json
+import os
 
 from sqlalchemy import case
 from modules.directoryScanner import directoryScanner
