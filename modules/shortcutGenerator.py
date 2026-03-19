@@ -49,62 +49,28 @@ def createShortcut(p_operatingSystem, command, name, outputFolder):
 
 def generateShortcuts(romFolders, operatingSystem, outputFolder):
 # {
-    if (os.path.exists(outputFolder) == False): os.mkdir(outputFolder)
+    os.makedirs(outputFolder, exist_ok=True)
+    SYSTEMS = \
+    {
+        romType.NES:       ("nes",       emulator.Nestopia,  ".nes"),
+        romType.SNES:      ("snes",      emulator.SNES9x,    ".sfc"),
+        romType.GBA:       ("gba",       emulator.mGBA,      ".gba"),
+        romType.WII:       ("wii",       emulator.Dolphin,   ".iso"),
+        romType.PRIMEHACK: ("primehack", emulator.PrimeHack, ".iso"),
+        romType._3DS:      ("3ds",       emulator.Azahar,    ".cci"),
+    }
     for romFolder in romFolders:
     # {
-        if romFolder.romType == romType.NES:
+        folderName, emulatorObj, extension = SYSTEMS[romFolder.romType]
+        systemOutput = os.path.join(outputFolder, folderName)
+        os.makedirs(systemOutput, exist_ok=True)
+        for rom in directoryScanner(romFolder.romPath):
         # {
-            if (os.path.exists(outputFolder + "\\" + "nes") == False): os.mkdir(outputFolder + "\\" + "nes")
-            for rom in directoryScanner(romFolder.romPath):
-            # {
-                shortcutCommand = emulator.Nestopia.createShortcutCommand(romFolder.romPath + "\\" + rom)
-                createShortcut(operatingSystem, shortcutCommand, rom.rstrip(".nes"), outputFolder+"\\"+"nes")
-            # }
-        # }
-        elif romFolder.romType == romType.SNES:
-        # {
-            if (os.path.exists(outputFolder + "\\" + "snes") == False): os.mkdir(outputFolder + "\\" + "snes")
-            for rom in directoryScanner(romFolder.romPath):
-            # {
-                shortcutCommand = emulator.SNES9x.createShortcutCommand(romFolder.romPath + "\\" + rom)
-                createShortcut(operatingSystem, shortcutCommand, rom.rstrip(".sfc"), outputFolder+"\\"+"snes")
-            # }
-        # }
-        elif romFolder.romType == romType.GBA:
-        # {
-            if (os.path.exists(outputFolder + "\\" + "gba") == False): os.mkdir(outputFolder + "\\" + "gba")
-            for rom in directoryScanner(romFolder.romPath):
-            # {
-                shortcutCommand = emulator.mGBA.createShortcutCommand(romFolder.romPath + "\\" + rom)
-                createShortcut(operatingSystem, shortcutCommand, rom.rstrip(".gba"), outputFolder+"\\"+"gba")
-            # }
-        # }
-        elif romFolder.romType == romType.WII:
-        # {
-            if (os.path.exists(outputFolder + "\\" + "wii") == False): os.mkdir(outputFolder + "\\" + "wii")
-            for rom in directoryScanner(romFolder.romPath):
-            # {
-                shortcutCommand = emulator.Dolphin.createShortcutCommand(romFolder.romPath + "\\" + rom)
-                createShortcut(operatingSystem, shortcutCommand, rom.rstrip(".iso"), outputFolder+"\\"+"wii")
-            # }
-        # }
-        elif romFolder.romType == romType.PRIMEHACK:
-        # {
-            if (os.path.exists(outputFolder + "\\" + "primehack") == False): os.mkdir(outputFolder + "\\" + "primehack")
-            for rom in directoryScanner(romFolder.romPath):
-            # {
-                shortcutCommand = emulator.PrimeHack.createShortcutCommand(romFolder.romPath + "\\" + rom)
-                createShortcut(operatingSystem, shortcutCommand, rom.rstrip(".iso"), outputFolder+"\\"+"primehack")
-            # }
-        # }
-        elif romFolder.romType == romType._3DS:
-        # {
-            if (os.path.exists(outputFolder + "\\" + "3ds") == False): os.mkdir(outputFolder + "\\" + "3ds")
-            for rom in directoryScanner(romFolder.romPath):
-            # {
-                shortcutCommand = emulator.Azahar.createShortcutCommand(romFolder.romPath + "\\" + rom)
-                createShortcut(operatingSystem, shortcutCommand, rom.rstrip(".cci"), outputFolder+"\\"+"3ds")
-            # }
+            romPath = os.path.join(romFolder.romPath, rom)
+            shortcutCommand = emulatorObj.createShortcutCommand(romPath)
+
+            romName = rom[:-len(extension)] if rom.endswith(extension) else rom
+            createShortcut(operatingSystem, shortcutCommand, romName, systemOutput)
         # }
     # }
 # }
