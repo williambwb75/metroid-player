@@ -8,9 +8,9 @@
 
 import os
 
-from modules.directoryScanner import directoryScanner
-from modules.sharedTypes import operatingSystem, romType
-import modules.emulatorData as emulator
+from directoryScanner import directoryScanner
+from sharedTypes import operatingSystem, romType
+import emulatorData as emulator
 
 class romFolder:
 # {

@@ -8,15 +8,15 @@
 
 import os
 
-from modules.configLoader import configLoader
-from modules.shortcutGenerator import generateShortcuts
-from modules.emulatorData import generateEmulatorData
-from modules.sharedTypes import operatingSystem
-from modules.directoryScanner import makeExecutable
+from configLoader import configLoader
+from shortcutGenerator import generateShortcuts
+from emulatorData import generateEmulatorData
+from sharedTypes import operatingSystem
+from directoryScanner import makeExecutable
 
 def main():
 # {
-    config = configLoader("config\\config.json")
+    config = configLoader("config.json")
     generateEmulatorData(config.operatingSystem)
     generateShortcuts(config.romFolders, config.operatingSystem, config.outputFolder)
     if (config.operatingSystem == operatingSystem.LINUX):

@@ -13,7 +13,7 @@ Azahar      = None
 Nestopia    = None
 PrimeHack   = None
 
-from modules.sharedTypes import operatingSystem, romType
+from sharedTypes import operatingSystem, romType
 
 class emulatorData:
 # {

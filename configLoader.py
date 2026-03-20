@@ -6,9 +6,9 @@
 # Author:   williambwb75
 # ------------------------- #
 
-from modules.directoryScanner   import directoryScanner
-from modules.sharedTypes        import operatingSystem, romType
-from modules.shortcutGenerator  import romFolder
+from directoryScanner   import directoryScanner
+from sharedTypes        import operatingSystem, romType
+from shortcutGenerator  import romFolder
 
 import json
 

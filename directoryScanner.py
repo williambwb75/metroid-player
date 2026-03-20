@@ -19,7 +19,10 @@ def makeExecutable(path):
     # {
         for file in directoryScanner(f"{path}\\{folder}"):
         # {
-            os.system(f"chmod +x {path}\\{folder}\\{file}")
+            if (file.endswith(".desktop")):
+            # {
+                os.system(f"chmod +x {path}\\{folder}\\{file}")
+            # }
         # }
     # }
 # }
