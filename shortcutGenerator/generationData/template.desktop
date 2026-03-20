@@ -3,5 +3,5 @@ Type=Application
 Name={name}
 Exec={command}
 Icon={icon}
-Categories=Game;
+Categories=Game
 Terminal=false

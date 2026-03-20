@@ -1,7 +1,7 @@
 import os
 from printStatus import *
 
-def shortcutGenerator(inputDirectory, outputDirectory, applicationPath, targetFileExtension, shortcutTemplate, commands):
+def shortcutGenerator(inputDirectory, outputDirectory, targetFileExtension, shortcutTemplate, commands):
     if checkOutputDirectory(outputDirectory) == False:
         return False
     if checkCommands(commands) == False:
@@ -19,9 +19,14 @@ def shortcutGenerator(inputDirectory, outputDirectory, applicationPath, targetFi
     if len(commands) != len(filenames):
         printWarning("Number of commands does not match number of files.")
         return False
+    printWarning("Erasing contents of output directory.")
+    for filename in os.listdir(outputDirectory):
+        filePath = os.path.join(outputDirectory, filename)
+        if os.path.isfile(filePath):
+            os.remove(filePath)
     for i, command in enumerate(commands):
         filename = filenames[i]
-        icon = applicationPath # Using the application as the icon for the shortcut, might replace in future
+        icon = '""'
         generateShortcut(outputDirectory, shortcutTemplate, command, filename, icon, targetFileExtension)
     return True
 

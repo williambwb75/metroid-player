@@ -3,8 +3,8 @@ from commandGenerator import commandGenerator
 from shortcutGenerator import shortcutGenerator
 from printStatus import *
 
-if __name__ == "__main__":
-    config = configLoader("generationData\\config.json")
+def main(configFilePath):
+    config = configLoader(configFilePath)
     if config == False:
         printError("Config loading failed. Exiting.")
         exit()
@@ -13,7 +13,8 @@ if __name__ == "__main__":
     if commands == False:
         printError("Command generation failed. Exiting.")
         exit()
-    if shortcutGenerator(config["inputDirectory"], config["outputDirectory"], config["applicationPath"], config["targetFileExtension"], config["shortcutTemplate"], commands) == False:
+    printInfo("Commands generated successfully.")
+    if shortcutGenerator(config["inputDirectory"], config["outputDirectory"], config["targetFileExtension"], config["shortcutTemplate"], commands) == False:
         printError("Shortcut generation failed. Exiting.")
         exit()
     printInfo("Commands generated successfully.")
