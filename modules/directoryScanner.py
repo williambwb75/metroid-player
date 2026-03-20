@@ -12,3 +12,14 @@ def directoryScanner(path):
 # {
     return os.listdir(path)
 # }
+
+def makeExecutable(path):
+# {
+    for folder in directoryScanner(path):
+    # {
+        for file in directoryScanner(f"{path}\\{folder}"):
+        # {
+            os.system(f"chmod +x {path}\\{folder}\\{file}")
+        # }
+    # }
+# }
