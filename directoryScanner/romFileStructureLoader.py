@@ -3,7 +3,7 @@ import os
 
 from printStatus import *
 
-def romFileStructureLoader(romFileStructurePath):
+def romFileStructureLoader(romFileStructurePath, inputPath):
     romFileStructure = openFile(romFileStructurePath)
     if romFileStructure == False:
         return False
@@ -14,11 +14,11 @@ def romFileStructureLoader(romFileStructurePath):
         return False
     if checkJsonTypes(romFileStructureJson) == False:
         return False
-    if checkDirectory(romFileStructureJson["romFilePath"]) == False:
+    if checkDirectory(inputPath) == False:
         return False
     if checkRomFileStructure(romFileStructureJson["romFileStructure"]) == False:
         return False
-    romFileStructureJson["romFileStructure"] = checkRomDirectoriesContainFiles(romFileStructureJson["romFilePath"], romFileStructureJson["romFileStructure"])
+    romFileStructureJson["romFileStructure"] = checkRomDirectoriesContainFiles(inputPath, romFileStructureJson["romFileStructure"])
     return romFileStructureJson
 
 def openFile(filePath):
@@ -41,7 +41,7 @@ def jsonFile(content):
         return False
 
 def checkJsonStructure(romFileStructureJson):
-    requiredKeys = ["romFilePath", "romFileStructure"]
+    requiredKeys = ["romFileStructure"]
     for key in requiredKeys:
         if key not in romFileStructureJson:
             printWarning(f"Missing required key: {key}")
@@ -49,9 +49,6 @@ def checkJsonStructure(romFileStructureJson):
     return True
 
 def checkJsonTypes(romFileStructureJson):
-    if not isinstance(romFileStructureJson["romFilePath"], str):
-        printWarning("romFilePath should be a string.")
-        return False
     if not isinstance(romFileStructureJson["romFileStructure"], dict):
         printWarning("romFileStructure should be a dictionary.")
         return False

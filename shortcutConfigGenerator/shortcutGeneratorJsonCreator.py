@@ -47,12 +47,13 @@ import json
 from printStatus import *
 
 def shortcutGeneratorJsonCreator(emulatorData, validDirectoriesJson, inputDirectory, outputDirectory, templateDirectory):
-    rom_root = validDirectoriesJson["romFilePath"]
-    rom_structure = validDirectoriesJson["romFileStructure"]
+    with open(validDirectoriesJson, 'r') as f:
+        rom_structure = json.loads(validDirectoriesJson)
+    rom_structure = rom_structure["romFileStructure"]
     os.makedirs(outputDirectory, exist_ok=True)
     generated_json = []
     for system_name, system_info in rom_structure.items():
-        system_dir = os.path.join(rom_root, system_name)
+        system_dir = os.path.join(inputDirectory, system_name)
 
         if not os.path.isdir(system_dir):
             printInfo(f"Skipping missing directory: {system_dir}", "warn")

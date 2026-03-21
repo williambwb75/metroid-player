@@ -6,7 +6,7 @@ from executeDirectoryScanner import executeDirectoryScanner
 from shortcutGeneratorJsonCreator import shortcutGeneratorJsonCreator
 from executeShortcutGenerator import executeShortcutGenerator
 
-def main(applicationData, emulatorData, romFolderPath, outputFolder):
+def main(applicationData, emulatorData, romFolderPath, outputFolder, templateDirectory):
     applicationData = applicationDataLoader(applicationData)
     if applicationData == False:
         printError("Failed to load application data.")
@@ -16,9 +16,12 @@ def main(applicationData, emulatorData, romFolderPath, outputFolder):
     if emulatorData == False:
         printError("Failed to load emulator data.")
         exit()
-    validDirectoriesJson = executeDirectoryScanner(applicationData["directoryScanner"]["romFileStructure"], applicationData["directoryScanner"]["outputFileName"])
+    validDirectoriesJson = executeDirectoryScanner(applicationData["directoryScanner"]["romFileStructure"], romFolderPath, applicationData["directoryScanner"]["outputFileName"])
+    if validDirectoriesJson == False:
+        printError("Failed to execute directory scanner.")
+        exit()
     printInfo("Directory Scanner executed successfully.")
-    shortcutGeneratorConfigFiles = shortcutGeneratorJsonCreator(emulatorData, validDirectoriesJson, outputFolder)
+    shortcutGeneratorConfigFiles = shortcutGeneratorJsonCreator(emulatorData, validDirectoriesJson, romFolderPath, outputFolder, templateDirectory)
     if shortcutGeneratorConfigFiles == False:
         print("Failed to generate config files.")
         exit()
@@ -33,4 +36,4 @@ if __name__ == "__main__":
     if len(sys.argv) <= 4:
         printError("Usage: python main.py <applicationData> <emulatorData> <romFilePath> <outputFolder>")
         exit()
-    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])

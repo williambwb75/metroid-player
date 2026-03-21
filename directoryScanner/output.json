@@ -1,0 +1,12 @@
+{
+  "romFileStructure": {
+    "nes": {
+      "fileExtension": ".nes",
+      "emulatorType": "nes"
+    },
+    "snes": {
+      "fileExtension": ".sfc",
+      "emulatorType": "snes"
+    }
+  }
+}
