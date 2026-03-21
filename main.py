@@ -71,8 +71,8 @@ def main():
     root = tk.Tk()
     root.title("Shortcut Generator")
 
-    root.geometry("750x350")
-    root.minsize(750, 350)
+    root.update_idletasks()
+    root.minsize(root.winfo_width(), root.winfo_height())
 
     entries = {}
     entries["input"] = add_row(root, "Input Directory:", 0, "folder", browse_directory_fn=browse_directory)

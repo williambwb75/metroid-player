@@ -96,3 +96,6 @@ def generateShortcut(outputDirectory, shortcutTemplate, command, filename, icon,
     shortcutPath = os.path.join(outputDirectory, f"{name}.{templateFileExtension}")
     with open(shortcutPath, "w") as shortcutFile:
         shortcutFile.write(template)
+    os.system()
+    if platform.system() == "Linux":
+        subprocess.run(["chmod", "+x", shortcutPath], check=True)

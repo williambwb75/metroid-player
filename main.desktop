@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
-Name=Release Project
-Exec=/usr/bin/python3 /path/to/your/release_script.py
+Name=Shortcut Generator
+Exec=/usr/bin/python3 $(dirname %k)/main.py
 Terminal=true
