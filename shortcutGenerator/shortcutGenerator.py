@@ -19,7 +19,7 @@ def shortcutGenerator(inputDirectory, outputDirectory, targetFileExtension, shor
     if len(commands) != len(filenames):
         printWarning("Number of commands does not match number of files.")
         return False
-    printWarning("Erasing contents of output directory.")
+    printWarning(f"Erasing contents of output directory. {outputDirectory}")
     for filename in os.listdir(outputDirectory):
         filePath = os.path.join(outputDirectory, filename)
         if os.path.isfile(filePath):

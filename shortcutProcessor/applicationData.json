@@ -1,0 +1,7 @@
+{
+    "directoryScanner":
+    {
+        "romFileStructure": "romFileStructure.json",
+        "outputFileName": "directoryScannerOutput.txt"
+    }
+}
