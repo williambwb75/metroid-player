@@ -67,7 +67,7 @@
         "switch":
         {
             "fileExtension": ".xci",
-            "application": "C:\\Users\\William\\Downloads\\Eden-Windows-v0.2.0-rc2-amd64-msvc-standard\\eden.exe",
+            "application": "C:\\Emulators\\Eden-Windows-v0.2.0-rc2-amd64-msvc-standard\\eden.exe",
             "arguments":
             [
                 "{filePath}"
