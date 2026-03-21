@@ -39,13 +39,13 @@ def openTemplate(templatePath):
         template = templateFile.read()
     if "{name}" not in template:
         printWarning("{name} placeholder not found in shortcutNameTemplate.")
-        return False
+        # return False
     if "{command}" not in template:
         printWarning("{command} placeholder not found in shortcutNameTemplate.")
         return False
     if "{icon}" not in template:
         printWarning("{icon} placeholder not found in shortcutNameTemplate.")
-        return False
+        # return False
     return template
 
 def checkOutputDirectory(outputDirectory):

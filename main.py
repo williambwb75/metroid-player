@@ -37,40 +37,28 @@ def browse_file(entry_widget):
 
 
 def generate_shortcuts(entries):
-    config_data = {
-        "inputDirectory": entries["input"].get(),
-        "outputDirectory": entries["output"].get(),
-        "targetFileExtension": entries["ext"].get(),
-        "applicationPath": entries["app"].get(),
-        "applicationArguments": entries["args"].get().split(";"),
-        "shortcutTemplate": entries["template"].get()
-    }
+    input_root = entries["input"].get()
+    output_root = entries["output"].get()
+    template_local = entries["template"].get()
 
-    if not all(config_data.values()):
-        messagebox.showerror("Error", "All fields must be filled.")
+    if not input_root or not output_root:
+        messagebox.showerror("Error", "Input and Output directories must be selected.")
         return
 
-    with open("config.json", "w") as file:
-        config_data["shortcutTemplate"] = "../"+config_data["shortcutTemplate"]
-        json.dump(config_data, file, indent=4)
+    if not os.path.isdir(input_root):
+        messagebox.showerror("Error", "Input directory does not exist.")
+        return
 
-    os.chdir("shortcutGenerator")
-    if platform.system() == "Linux":
-        os.system("python main.py ../config.json")
-    elif platform.system() == "Windows":
-        os.system("py main.py ../config.json")
-    else:
-        print("Invalid operating system detected. Exiting")
-        quit()
-    os.chdir("..")
-    os.remove("config.json")
+    os.makedirs(output_root, exist_ok=True)
+
+    process_subfolders(input_root, output_root, template_local)
+
+    messagebox.showinfo("Done", "Shortcuts generated for all detected ROM folders.")
+
 
 def load_existing_config(entries, config):
     entries["input"].insert(0, config.get("inputDirectory", ""))
     entries["output"].insert(0, config.get("outputDirectory", ""))
-    entries["ext"].insert(0, config.get("targetFileExtension", ""))
-    entries["app"].insert(0, config.get("applicationPath", ""))
-    entries["args"].insert(0, ";".join(config.get("applicationArguments", [])))
     entries["template"].insert(0, config.get("shortcutTemplate", ""))
 
 
@@ -84,25 +72,60 @@ def main():
     entries = {}
     entries["input"] = add_row(root, "Input Directory:", 0, "folder", browse_directory_fn=browse_directory)
     entries["output"] = add_row(root, "Output Directory:", 1, "folder", browse_directory_fn=browse_directory)
-    entries["ext"] = add_row(root, "Target File Extension (.txt):", 2)
-    entries["app"] = add_row(root, "Application Path:", 3, "file", browse_file_fn=browse_file)
-    entries["args"] = add_row(root, "Application Arguments (semicolon-separated):", 4)
-    entries["template"] = add_row(root, "Shortcut Template File:", 5, "file", browse_file_fn=browse_file)
+    entries["template"] = add_row(root, "Shortcut Template File:", 2, "file", browse_file_fn=browse_file)
 
     save_button = tk.Button(root, text="Generate", command=lambda: generate_shortcuts(entries), width=20)
-    save_button.grid(row=6, column=1, pady=20)
+    save_button.grid(row=3, column=1, pady=20)
 
     existing_config = {
         "inputDirectory": "",
         "outputDirectory": "",
-        "targetFileExtension": "",
-        "applicationPath": "",
-        "applicationArguments": ["{filePath}"],
-        "shortcutTemplate": "template.desktop"
+        "shortcutTemplate": ""
     }
+    if platform.system() == "Linux":
+        existing_config["shortcutTemplate"] = "template.desktop"
+    elif platform.system() == "Windows":
+        existing_config["shortcutTemplate"] = "template.bat"
 
     load_existing_config(entries, existing_config)
     root.mainloop()
+
+def load_rom_structure():
+    with open("romFolderStructure"+platform.system()+".json", "r") as f:
+        return json.load(f)["subFolders"]
+
+def process_subfolders(input_root, output_root, shortcut_directory):
+    rom_structure = load_rom_structure()
+
+    for folder_name, settings in rom_structure.items():
+        input_sub = os.path.join(input_root, folder_name)
+        output_sub = os.path.join(output_root, folder_name)
+
+        if os.path.isdir(input_sub):
+            print(f"Found ROM folder: {folder_name}")
+
+            os.makedirs(output_sub, exist_ok=True)
+
+            config_data = {
+                "inputDirectory": input_sub,
+                "outputDirectory": output_sub,
+                "targetFileExtension": settings["fileExtension"],
+                "applicationPath": settings["application"],
+                "applicationArguments": settings["arguments"],
+                "shortcutTemplate": f"../{shortcut_directory}"
+            }
+
+            with open("config.json", "w") as file:
+                json.dump(config_data, file, indent=4)
+
+            os.chdir("shortcutGenerator")
+            if platform.system() == "Linux":
+                os.system("python main.py ../config.json")
+            elif platform.system() == "Windows":
+                os.system("py main.py ../config.json")
+            os.chdir("..")
+
+            os.remove("config.json")
 
 if __name__ == "__main__":
     main()

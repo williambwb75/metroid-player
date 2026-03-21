@@ -9,18 +9,18 @@
             [
                 "run",
                 "NESBOX",
-                "{filename}"
+                "{filePath}"
             ]
         },
         "snes":
         {
-            "fileExtension": ".snes",
+            "fileExtension": ".sfc",
             "application": "flatpak",
             "arguments": 
             [
                 "run",
                 "snes9x",
-                "{filename}"
+                "{filePath}"
             ]
         },
         "gc":
@@ -31,7 +31,7 @@
             [
                 "run",
                 "dolphin",
-                "--exec={filename}"
+                "--exec={filePath}"
             ]
         }
     }

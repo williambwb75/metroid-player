@@ -1,0 +1,77 @@
+{
+    "subFolders": 
+    {
+        "nes":
+        {   
+            "fileExtension": ".nes",
+            "application": "C:\\Emulators\\iNES61-Windows-bin\\iNES.exe",
+            "arguments": 
+            [
+                "{filePath}"
+            ]
+        },
+        "snes":
+        {
+            "fileExtension": ".sfc",
+            "application": "C:\\Emulators\\snes9x-1.63-win32-x64\\snes9x-x64.exe",
+            "arguments": 
+            [
+                "{filePath}"
+            ]
+        },
+        "gba":
+        {
+            "fileExtension": ".gba",
+            "application": "C:\\Emulators\\mGBA-0.10.5-win32\\mGBA.exe",
+            "arguments": 
+            [
+                "{filePath}"
+            ]
+        },
+        "gc":
+        {
+            "fileExtension": ".iso",
+            "application": "C:\\Emulators\\dolphin-2603a-x64\\Dolphin-x64\\Dolphin.exe",
+            "arguments":
+            [
+                "{filePath}"
+            ]
+        },
+        "wii":
+        {
+            "fileExtension": ".iso",
+            "application": "C:\\Emulators\\dolphin-2603a-x64\\Dolphin-x64\\Dolphin.exe",
+            "arguments":
+            [
+                "{filePath}"
+            ]
+        },
+        "nds":
+        {
+            "fileExtension": ".nds",
+            "application": "C:\\Emulators\\melonDS-1.1-windows-x86_64\\melonDS.exe",
+            "arguments":
+            [
+                "{filePath}"
+            ]
+        },
+        "3ds":
+        {
+            "fileExtension": ".cci",
+            "application": "C:\\Emulators\\azahar-2124.3-windows-msvc\\azahar-2124.3-windows-msvc\\azahar.exe",
+            "arguments":
+            [
+                "{filePath}"
+            ]
+        },
+        "switch":
+        {
+            "fileExtension": ".xci",
+            "application": "C:\\Users\\William\\Downloads\\Eden-Windows-v0.2.0-rc2-amd64-msvc-standard\\eden.exe",
+            "arguments":
+            [
+                "{filePath}"
+            ]
+        }
+    }
+}
