@@ -4,7 +4,35 @@
         "nes":
         {   
             "fileExtension": ".nes",
-            ""
-        }   
+            "application": "flatpak",
+            "arguments": 
+            [
+                "run",
+                "NESBOX",
+                "{filename}"
+            ]
+        },
+        "snes":
+        {
+            "fileExtension": ".snes",
+            "application": "flatpak",
+            "arguments": 
+            [
+                "run",
+                "snes9x",
+                "{filename}"
+            ]
+        },
+        "gc":
+        {
+            "fileExtension": ".iso",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "dolphin",
+                "--exec={filename}"
+            ]
+        }
     }
 }
