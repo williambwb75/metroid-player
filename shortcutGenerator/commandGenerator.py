@@ -19,9 +19,9 @@ def scanDirectoryForFiles(directoryPath, fileExtension):
     return files
 
 def createCommand(applicationPath, applicationArguments, filePath):
-    if not applicationPath or not os.path.exists(applicationPath):
-        printWarning(f"Application path does not exist: {applicationPath}")
-        return False
+    # if not applicationPath or not os.path.exists(applicationPath):
+    #     printWarning(f"Application path does not exist: {applicationPath}")
+    #     return False
     if not filePath or not os.path.exists(filePath):
         printWarning(f"File path does not exist: {filePath}")
         return False

@@ -1,0 +1,10 @@
+{
+    "inputDirectory": "C:/Users/William/Desktop/roms/nes",
+    "outputDirectory": "C:/Users/William/Desktop/roms/nes",
+    "targetFileExtension": ".nes",
+    "applicationPath": "C:\\Users\\William\\Downloads\\iNES61-Windows-bin\\iNES.exe",
+    "applicationArguments": [
+        "{filePath}"
+    ],
+    "shortcutTemplate": "..\\template.desktop"
+}

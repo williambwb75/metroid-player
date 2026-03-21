@@ -19,8 +19,8 @@ def configLoader(configFilePath):
         return False
     if checkDirectoryContainsFiles(configJson["inputDirectory"], configJson["targetFileExtension"]) == False:
         return False
-    if checkTargetApplication(configJson["applicationPath"]) == False:
-        return False
+    # if checkTargetApplication(configJson["applicationPath"]) == False:
+    #     return False
     if checkTargetApplicationArguments(configJson["applicationArguments"]) == False:
         return False
     if checkShortcutTemplateExists(configJson["shortcutTemplate"]) == False:

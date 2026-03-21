@@ -1,0 +1,10 @@
+{
+    "inputDirectory": "C:/Users/William/Desktop/roms/snes",
+    "outputDirectory": "C:/Users/William/Desktop/output/snes",
+    "targetFileExtension": ".sfc",
+    "applicationPath": "flatpak run snesemulator",
+    "applicationArguments": [
+        "{filePath}"
+    ],
+    "shortcutTemplate": "..\\template.desktop"
+}
