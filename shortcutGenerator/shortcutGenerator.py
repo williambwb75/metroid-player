@@ -21,9 +21,9 @@ def shortcutGenerator(inputDirectory, outputDirectory, targetFileExtension, shor
         printWarning("Number of commands does not match number of files.")
         return False
     for filename in os.listdir(outputDirectory):
-        printWarning(f"Overriding existing shortcut in output directory: {filename}")
         filePath = os.path.join(outputDirectory, filename)
         if os.path.isfile(filePath):
+            printWarning(f"Overriding existing shortcut in output directory: {filePath}")
             os.remove(filePath)
     for i, command in enumerate(commands):
         filename = filenames[i]

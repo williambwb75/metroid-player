@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import json
+import platform
 import os
 
 def add_row(root, label_text, row, browse_type=None, browse_directory_fn=None, browse_file_fn=None):
@@ -54,9 +55,15 @@ def generate_shortcuts(entries):
         json.dump(config_data, file, indent=4)
 
     os.chdir("shortcutGenerator")
-    os.system("python main.py ../config.json")
+    if platform.system() == "Linux":
+        os.system("python main.py ../config.json")
+    elif platform.system() == "Windows":
+        os.system("py main.py ../config.json")
+    else:
+        print("Invalid operating system detected. Exiting")
+        quit()
     os.chdir("..")
-
+    os.remove("config.json")
 
 def load_existing_config(entries, config):
     entries["input"].insert(0, config.get("inputDirectory", ""))
