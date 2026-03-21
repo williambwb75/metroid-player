@@ -50,11 +50,11 @@ def generate_shortcuts(entries):
         return
 
     with open("config.json", "w") as file:
-        config_data["shortcutTemplate"] = "..\\"+config_data["shortcutTemplate"]
+        config_data["shortcutTemplate"] = "../"+config_data["shortcutTemplate"]
         json.dump(config_data, file, indent=4)
 
     os.chdir("shortcutGenerator")
-    os.system("python main.py ..\\config.json")
+    os.system("python main.py ../config.json")
     os.chdir("..")
 
 

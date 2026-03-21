@@ -1,4 +1,5 @@
 import os
+import platform
 from printStatus import *
 
 def shortcutGenerator(inputDirectory, outputDirectory, targetFileExtension, shortcutTemplate, commands):
@@ -19,8 +20,8 @@ def shortcutGenerator(inputDirectory, outputDirectory, targetFileExtension, shor
     if len(commands) != len(filenames):
         printWarning("Number of commands does not match number of files.")
         return False
-    printWarning(f"Erasing contents of output directory. {outputDirectory}")
     for filename in os.listdir(outputDirectory):
+        printWarning(f"Overriding existing shortcut in output directory: {filename}")
         filePath = os.path.join(outputDirectory, filename)
         if os.path.isfile(filePath):
             os.remove(filePath)
@@ -96,6 +97,5 @@ def generateShortcut(outputDirectory, shortcutTemplate, command, filename, icon,
     shortcutPath = os.path.join(outputDirectory, f"{name}.{templateFileExtension}")
     with open(shortcutPath, "w") as shortcutFile:
         shortcutFile.write(template)
-    os.system()
     if platform.system() == "Linux":
-        subprocess.run(["chmod", "+x", shortcutPath], check=True)
+        os.system(f'chmod +x "{shortcutPath}"')

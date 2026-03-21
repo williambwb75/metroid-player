@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Shortcut Generator
-Exec=/usr/bin/python3 $(dirname %k)/main.py
-Terminal=true

@@ -34,8 +34,8 @@ def createCommand(applicationPath, applicationArguments, filePath):
         return False
     command = [applicationPath]
     for arg in applicationArguments:
-        command.append(arg.replace("{filePath}", filePath))
-    return ' '.join(f'"{arg}"' for arg in command)
+        command.append(arg.replace("{filePath}", '"'+filePath+'"'))
+    return ' '.join(f"{arg}" for arg in command)
 
 def createCommandForFiles(files, inputDirectory, applicationPath, applicationArguments):
     commands = []

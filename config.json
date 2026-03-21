@@ -1,10 +1,10 @@
 {
-    "inputDirectory": "C:/Users/William/Desktop/roms/snes",
-    "outputDirectory": "C:/Users/William/Desktop/output/snes",
+    "inputDirectory": "/home/deck/Games/snes9x",
+    "outputDirectory": "/home/deck/Games/Launchers/snes9x",
     "targetFileExtension": ".sfc",
-    "applicationPath": "flatpak run snesemulator",
+    "applicationPath": "com.snes9x.Snes9x ",
     "applicationArguments": [
         "{filePath}"
     ],
-    "shortcutTemplate": "..\\template.desktop"
+    "shortcutTemplate": "../template.desktop"
 }
