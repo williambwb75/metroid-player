@@ -52,8 +52,10 @@
             "application": "C:\\Emulators\\Cemu_2.6\\Cemu.exe",
             "arguments":
             [
+                "--game",
+                "{filePath}",
                 "--fullscreen",
-                "{filePath}"
+                "yes"
             ]
         },
         "nds":
