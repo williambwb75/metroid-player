@@ -75,7 +75,7 @@
         "switch":
         {
             "fileExtension": ".xci",
-            "application": "$HOME/Applications/Eden-Linux-v0.2.0-rc2-steamdeck-clang-pgo.AppImage",
+            "application": "/home/deck/Applications/Eden-Linux-v0.2.0-rc2-steamdeck-clang-pgo.AppImage",
             "arguments":
             [
                 "-f",
