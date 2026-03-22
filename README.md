@@ -8,7 +8,8 @@ It uses a template file and a JSON‑defined folder structure (romFolderStructur
 
 ---
 
-Usage
+## Usage
+
 - If on windows rum 'start.bat' to get you going
 - If on linux run 'start.sh' to get you going
 - Developed with python 3.11.6 installed and working, but i expect any python 3.x version will work fine
@@ -24,7 +25,7 @@ Usage
 
 ---
 
-What It Does
+## What It Does
 
 - Detects ROM subfolders (defined in romFolderStructure json)
 - Reads the correct file extension + emulator command from a JSON structure file
@@ -35,15 +36,15 @@ What It Does
 
 ---
 
-How It Works
+## How It Works
 
-- You select:
+You select:
  - Input directory (your ROM folders)
  - Output directory (where shortcuts go)
  - Shortcut template file
  - ROM folder structure JSON
 
-- The Tool:
+The Tool:
  - Loads the JSON structure
  - Scans each defined subfolder
  - Creates a temporary config
