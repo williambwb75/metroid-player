@@ -38,17 +38,17 @@ What It Does
 How It Works
 
 - You select:
-- - Input directory (your ROM folders)
-- - Output directory (where shortcuts go)
-- - Shortcut template file
-- - ROM folder structure JSON
+ - Input directory (your ROM folders)
+ - Output directory (where shortcuts go)
+ - Shortcut template file
+ - ROM folder structure JSON
 
 - The Tool:
-- - Loads the JSON structure
-- - Scans each defined subfolder
-- - Creates a temporary config
-- - Calls the shortcut generator
-- - Produces shortcuts using your template
+ - Loads the JSON structure
+ - Scans each defined subfolder
+ - Creates a temporary config
+ - Calls the shortcut generator
+ - Produces shortcuts using your template
 
 ---
 
