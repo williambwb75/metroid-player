@@ -83,15 +83,15 @@ def main():
         "shortcutTemplate": ""
     }
     if platform.system() == "Linux":
-        existing_config["shortcutTemplate"] = "template.desktop"
+        existing_config["shortcutTemplate"] = "templates/template.desktop"
     elif platform.system() == "Windows":
-        existing_config["shortcutTemplate"] = "template.bat"
+        existing_config["shortcutTemplate"] = "templates/template.bat"
 
     load_existing_config(entries, existing_config)
     root.mainloop()
 
 def load_rom_structure():
-    with open("romFolderStructure"+platform.system()+".json", "r") as f:
+    with open("romFolderStructure/"+platform.system()+".json", "r") as f:
         return json.load(f)["subFolders"]
 
 def process_subfolders(input_root, output_root, shortcut_directory):
