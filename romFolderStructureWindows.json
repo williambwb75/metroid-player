@@ -30,7 +30,7 @@
         },
         "gc":
         {
-            "fileExtension": ".iso",
+            "fileExtension": ".rvz",
             "application": "C:\\Emulators\\dolphin-2603a-x64\\Dolphin-x64\\Dolphin.exe",
             "arguments":
             [
@@ -39,7 +39,7 @@
         },
         "wii":
         {
-            "fileExtension": ".iso",
+            "fileExtension": ".rvz",
             "application": "C:\\Emulators\\dolphin-2603a-x64\\Dolphin-x64\\Dolphin.exe",
             "arguments":
             [
