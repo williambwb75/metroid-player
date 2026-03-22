@@ -46,6 +46,16 @@
                 "{filePath}"
             ]
         },
+        "wiiu":
+        {
+            "fileExtension": ".wua",
+            "application": "C:\\Emulators\\Cemu_2.6\\Cemu.exe",
+            "arguments":
+            [
+                "--fullscreen",
+                "{filePath}"
+            ]
+        },
         "nds":
         {
             "fileExtension": ".nds",
