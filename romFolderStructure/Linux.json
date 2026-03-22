@@ -59,6 +59,19 @@
                 "--exec={filePath}"
             ]
         },
+        "wiiu":
+        {
+            "fileExtension": ".wua",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "info.cemu.Cemu",
+                "-g",
+                "{filePath}",
+                "-f"
+            ]
+        },
         "switch":
         {
             "fileExtension": ".xci",
