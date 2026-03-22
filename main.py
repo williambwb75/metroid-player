@@ -40,6 +40,7 @@ def generate_shortcuts(entries):
     input_root = entries["input"].get()
     output_root = entries["output"].get()
     template_local = entries["template"].get()
+    structure_local = entries["structure"].get()
 
     if not input_root or not output_root:
         messagebox.showerror("Error", "Input and Output directories must be selected.")
@@ -51,7 +52,7 @@ def generate_shortcuts(entries):
 
     os.makedirs(output_root, exist_ok=True)
 
-    process_subfolders(input_root, output_root, template_local)
+    process_subfolders(input_root, output_root, template_local, structure_local)
 
     messagebox.showinfo("Done", "Shortcuts generated for all detected ROM folders.")
 
@@ -73,9 +74,10 @@ def main():
     entries["input"] = add_row(root, "Input Directory:", 0, "folder", browse_directory_fn=browse_directory)
     entries["output"] = add_row(root, "Output Directory:", 1, "folder", browse_directory_fn=browse_directory)
     entries["template"] = add_row(root, "Shortcut Template File:", 2, "file", browse_file_fn=browse_file)
+    entries["structure"] = add_row(root, "Roms Folder Structure:", 3, "file", browse_file_fn=browse_file)
 
     save_button = tk.Button(root, text="Generate", command=lambda: generate_shortcuts(entries), width=20)
-    save_button.grid(row=3, column=1, pady=20)
+    save_button.grid(row=4, column=1, pady=20)
 
     existing_config = {
         "inputDirectory": "",
@@ -84,18 +86,20 @@ def main():
     }
     if platform.system() == "Linux":
         existing_config["shortcutTemplate"] = "templates/template.desktop"
+        entries["structure"].insert(0, "romFolderStructure/Linux.json")
     elif platform.system() == "Windows":
         existing_config["shortcutTemplate"] = "templates/template.bat"
+        entries["structure"].insert(0, "romFolderStructure/Windows.json")
 
     load_existing_config(entries, existing_config)
     root.mainloop()
 
-def load_rom_structure():
-    with open("romFolderStructure/"+platform.system()+".json", "r") as f:
+def load_rom_structure(rom_structure_path):
+    with open(rom_structure_path, "r") as f:
         return json.load(f)["subFolders"]
 
-def process_subfolders(input_root, output_root, shortcut_directory):
-    rom_structure = load_rom_structure()
+def process_subfolders(input_root, output_root, shortcut_directory, rom_structure_path):
+    rom_structure = load_rom_structure(rom_structure_path)
 
     for folder_name, settings in rom_structure.items():
         input_sub = os.path.join(input_root, folder_name)
