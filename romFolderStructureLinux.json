@@ -8,7 +8,7 @@
             "arguments": 
             [
                 "run",
-                "NESBOX",
+                "ca._0ldsk00l.Nestopia",
                 "{filePath}"
             ]
         },
@@ -19,19 +19,90 @@
             "arguments": 
             [
                 "run",
-                "snes9x",
+                "com.snes9x.Snes9x",
                 "{filePath}"
             ]
         },
         "gc":
         {
-            "fileExtension": ".iso",
+            "fileExtension": ".rvz",
             "application": "flatpak",
             "arguments":
             [
                 "run",
-                "dolphin",
+                "org.DolphinEmu.dolphin-emu",
+                "--batch",
                 "--exec={filePath}"
+            ]
+        },
+        "wii":
+        {
+            "fileExtension": ".rvz",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "org.DolphinEmu.dolphin-emu",
+                "--batch",
+                "--exec={filePath}"
+            ]
+        },
+        "primehack":
+        {
+            "fileExtension": ".rvz",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "io.github.shiiion.primehack",
+                "--batch",
+                "--exec={filePath}"
+            ]
+        },
+        "switch":
+        {
+            "fileExtension": ".xci",
+            "application": "$HOME/Applications/Eden-Linux-v0.2.0-rc2-steamdeck-clang-pgo.AppImage",
+            "arguments":
+            [
+                "-f",
+                "{filePath}"
+            ]
+        },
+        "gba":
+        {
+            "fileExtension": ".gba",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "io.mgba.mGBA",
+                "--fullscreen",
+                "{filePath}"
+            ]
+        },
+        "nds":
+        {
+            "fileExtension": ".nds",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "net.kuribo64.melonDS",
+                "--fullscreen",
+                "{filePath}"
+            ]
+        },
+        "3ds":
+        {
+            "fileExtension": ".cci",
+            "application": "flatpak",
+            "arguments":
+            [
+                "run",
+                "org.azahar_emu.Azahar",
+                "--fullscreen",
+                "{filePath}"
             ]
         }
     }
